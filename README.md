@@ -1,20 +1,15 @@
-# Webots docker
+# Robotica docker
 
 ## Build docker
 
 ```bash
-make webots_docker
+make robotica_docker
 ```
 
 ## Run
 
-Needs an NVIDIA graphics card.
+Install `nvidia-container-toolkit` first.
 
 ```bash
 ./run
 ```
-
-# TODO
-
-- Webots controllers: https://cyberbotics.com/doc/guide/tutorial-4-more-about-controllers
-- Webots supervisor: https://www.cyberbotics.com/doc/reference/supervisor

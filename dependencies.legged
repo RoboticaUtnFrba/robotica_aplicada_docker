@@ -1,0 +1,7 @@
+cmake
+libeigen3-dev
+coinor-libipopt-dev
+libncurses5-dev
+xterm
+
+ros-noetic-ifopt

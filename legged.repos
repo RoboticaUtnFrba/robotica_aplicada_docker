@@ -1,0 +1,25 @@
+repositories:
+  champ:
+    type: git
+    url: https://github.com/chvmp/champ.git
+    version: master
+  champ_teleop:
+    type: git
+    url: https://github.com/chvmp/champ_teleop.git
+    version: master
+  towr:
+    type: git
+    url: https://github.com/eborghi10/towr.git
+    version: noetic-devel
+  xpp:
+    type: git
+    url: https://github.com/thvhauwe/xpp.git
+    version: noetic_fix
+  xpp_champ:
+    type: git
+    url: https://github.com/eborghi10/xpp_champ.git
+    version: noetic-devel
+  yocs_velocity_smoother:
+    type: git
+    url: https://github.com/chvmp/yocs_velocity_smoother.git
+    version: master

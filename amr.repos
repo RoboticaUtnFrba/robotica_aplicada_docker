@@ -1,0 +1,20 @@
+repositories:
+  plansys2_tfd_plan_solver:
+    type: git
+    url: https://github.com/IntelligentRoboticsLabs/plansys2_tfd_plan_solver.git
+    version: foxy-devel
+
+  ros_tutorials:
+    type: git
+    url: https://github.com/ros/ros_tutorials.git
+    version: foxy-devel
+
+  ros2_planning_system:
+    type: git
+    url: https://github.com/IntelligentRoboticsLabs/ros2_planning_system.git
+    version: foxy-devel
+
+  ros2_planning_system_examples:
+    type: git
+    url: https://github.com/IntelligentRoboticsLabs/ros2_planning_system_examples.git
+    version: foxy-devel
