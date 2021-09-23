@@ -1,5 +1,6 @@
 # https://hub.docker.com/r/nvidia/cudagl
-FROM nvidia/cudagl:11.3.0-runtime-ubuntu20.04
+ARG UBUNTU
+FROM nvidia/cudagl:11.3.0-runtime-ubuntu${UBUNTU}.04
 
 LABEL maintainer="Emiliano Borghi <eborghiorue@frba.utn.edu.ar>"
 

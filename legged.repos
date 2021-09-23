@@ -11,6 +11,14 @@ repositories:
     type: git
     url: https://github.com/eborghi10/towr.git
     version: noetic-devel
+  whole_body_state_msgs:
+    type: git
+    url: https://github.com/loco-3d/whole_body_state_msgs.git
+    version: master
+  whole_body_state_rviz_plugin:
+    type: git
+    url: https://github.com/loco-3d/whole_body_state_rviz_plugin.git
+    version: master
   xpp:
     type: git
     url: https://github.com/thvhauwe/xpp.git

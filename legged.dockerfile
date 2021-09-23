@@ -1,4 +1,4 @@
-FROM robotica:multirobots
+FROM robotica:webots_ros1_noetic
 
 USER root
 
@@ -21,7 +21,7 @@ RUN git clone https://github.com/ethz-adrl/ifopt.git -b master \
 	&& sudo make install \
     && sudo ldconfig
 ## Towr
-RUN git clone https://github.com/eborghi10/towr.git -b noetic-devel \
+RUN git clone https://github.com/eborghi10/towr.git -b ${ROS_DISTRO}-devel \
     && mkdir towr/towr/build && cd towr/towr/build \
 	&& cmake .. -DCMAKE_BUILD_TYPE=Release && make -j$(nproc) \
 	&& sudo make install \
@@ -39,11 +39,14 @@ WORKDIR $LEGGED_WS
 RUN rm -rf ${LEGGED_WS}/src/towr/towr
 RUN apt-get update
 USER $USER
-RUN rosdep install --from-paths src --rosdistro=noetic -yi -r
+RUN rosdep install --from-paths src --rosdistro=${ROS_DISTRO} -yi -r
 USER root
-RUN /bin/bash -c ". /opt/ros/noetic/setup.bash; \
-    catkin_make -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/ros/noetic; \
+RUN /bin/bash -c ". /opt/ros/${ROS_DISTRO}/setup.bash; \
+    catkin_make -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/ros/${ROS_DISTRO}; \
     cd build; make install"
 RUN rm -r ${LEGGED_WS}
+
+COPY requirements.legged.txt requirements.legged.txt
+RUN cat requirements.legged.txt | xargs pip3 install
 
 CMD [ "/bin/bash", "-c" ]

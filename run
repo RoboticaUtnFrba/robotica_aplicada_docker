@@ -9,21 +9,29 @@ fi
 IMAGE_NAME="robotica:$IMAGE_TYPE"
 CONTAINER_NAME="robotica_$IMAGE_TYPE"
 
-xhost +local:docker
-
-docker run -it --rm \
-    --privileged \
-    --network host \
-    --env DISPLAY \
-    --volume $HOME/.bash_history:/home/robotica/.bash_history:rw \
-    --volume $HOME/.Xauthority:/home/robotica/.Xauthority:rw \
-    --volume /tmp/.X11-unix:/tmp/.X11-unix:rw \
-    --user $(id -u $USER):$(id -g $USER) \
-    --volume $HOME/catkin_ws:/home/robotica/catkin_ws \
-    --volume $HOME/colcon_ws:/home/robotica/colcon_ws \
-    --gpus all \
-    --workdir /home/robotica \
-    --name $CONTAINER_NAME \
-    $IMAGE_NAME bash
-
-xhost -local:docker
+if [ ! $(docker ps --quiet --filter name=$CONTAINER_NAME) ]; then
+    xhost +local:docker
+    echo "Running container"
+    docker run -it --rm \
+        --privileged \
+        --network host \
+        --env DISPLAY \
+        --volume $HOME/.bash_history:/home/robotica/.bash_history:rw \
+        --volume $HOME/.Xauthority:/home/robotica/.Xauthority:rw \
+        --volume /tmp/.X11-unix:/tmp/.X11-unix:rw \
+        --user $(id -u $USER):$(id -g $USER) \
+        --volume $HOME/catkin_ws/src/$IMAGE_TYPE:/home/robotica/catkin_ws/src:rw \
+        --volume $HOME/catkin_ws/.$IMAGE_TYPE/build:/home/robotica/catkin_ws/build:rw \
+        --volume $HOME/catkin_ws/.$IMAGE_TYPE/devel:/home/robotica/catkin_ws/devel:rw \
+        --volume $HOME/colcon_ws/src/$IMAGE_TYPE:/home/robotica/colcon_ws/src:rw \
+        --volume $HOME/colcon_ws/.$IMAGE_TYPE/build:/home/robotica/colcon_ws/build:rw \
+        --volume $HOME/colcon_ws/.$IMAGE_TYPE/install:/home/robotica/colcon_ws/install:rw \
+        --gpus all \
+        --workdir /home/robotica \
+        --name $CONTAINER_NAME \
+        $IMAGE_NAME bash
+    xhost -local:docker
+else
+    echo "Container is already running, another terminal in the same container is opened"
+    docker exec -it --rm $CONTAINER_NAME bash
+fi

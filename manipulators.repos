@@ -1,0 +1,21 @@
+repositories:
+  columbiax_robotics:
+    type: git
+    url: https://github.com/eborghi10/ColumbiaX-Robotics.git
+    version: master
+  industrial_robots:
+    type: git
+    url: https://github.com/eborghi10/IndustrialRobots.git
+    version: master
+  moveit_grasps:
+    type: git
+    url: https://github.com/eborghi10/moveit_grasps.git
+    version: melodic-devel-fix
+  moveit_tutorials:
+    type: git
+    url: https://github.com/ros-planning/moveit_tutorials.git
+    version: melodic-devel
+  universal_robot:
+    type: git
+    url: https://github.com/ros-industrial/universal_robot.git
+    version: melodic-devel

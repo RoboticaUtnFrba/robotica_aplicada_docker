@@ -1,7 +1,15 @@
 cmake
 libeigen3-dev
 coinor-libipopt-dev
+libgl1-mesa-dev
+libjsoncpp-dev
 libncurses5-dev
+libspdlog-dev
+libusb-1.0.0-dev
+libzmq3-dev
+mesa-common-dev
+python3-pcl
+python3-pip
 xterm
 
-ros-noetic-ifopt
+ros-*-ifopt

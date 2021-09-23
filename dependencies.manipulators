@@ -1,0 +1,14 @@
+python-catkin-tools
+python-pip
+python-vcstool
+
+ros-*-jderobot-assets
+ros-*-moveit
+ros-*-moveit-visual-tools
+ros-*-panda-moveit-config
+ros-*-perception
+ros-*-perception-pcl
+ros-*-pcl-ros
+ros-*-position-controllers
+ros-*-ros-control
+ros-*-ros-controllers

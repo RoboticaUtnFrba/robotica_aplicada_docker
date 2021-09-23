@@ -1,8 +1,12 @@
-FROM robotica:ros1
+ARG UBUNTU
+FROM robotica:ubuntu_${UBUNTU}
+
+ARG ROS
+ENV ROS_DISTRO=${ROS}
 
 USER root
 
-# Install ROS Foxy
+# Install ROS
 
 # Setup keys for ROS
 RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
@@ -13,16 +17,21 @@ COPY dependencies.ros2 dependencies.ros2
 RUN apt-get update && \
   xargs -a dependencies.ros2 apt-get install -y -qq
 
-ENV ROS_DISTRO=foxy
-
 # Automatically source ROS workspace
 RUN echo ". /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/$USER/.bashrc
 ENV COLCON_SETUP_BASH "/home/${USER}/colcon_ws/install/local_setup.bash"
 RUN echo "[[ -f ${COLCON_SETUP_BASH} ]] && . ${COLCON_SETUP_BASH}" >> /home/$USER/.bashrc
 
+# Initialize rosdep
+RUN rosdep init
+USER $USER
+# HOME needs to be set explicitly. Without it, the HOME environment variable is set to "/"
+RUN HOME=/home/$USER rosdep update
+
 ######################################################
 
 # setup entrypoint
+USER root
 COPY ./ros2_entrypoint.sh /
 RUN chmod +x /ros2_entrypoint.sh
 

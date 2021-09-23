@@ -1,8 +1,11 @@
-FROM robotica:ros2
+ARG PARENT
+FROM robotica:${PARENT}
+
+USER root
 
 # Install Webots
 WORKDIR /home/${USER}
-COPY dependencies.webots dependencies.webots
+COPY dependencies.webots.${ROS_DISTRO} dependencies.webots
 RUN wget -qO- https://cyberbotics.com/Cyberbotics.asc | apt-key add -
 RUN apt-add-repository 'deb https://cyberbotics.com/debian/ binary-amd64/'
 RUN apt-get update && \
