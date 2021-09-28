@@ -4,8 +4,8 @@ python-vcstool
 
 ros-*-jderobot-assets
 ros-*-moveit
+ros-*-moveit-python
 ros-*-moveit-visual-tools
-ros-*-panda-moveit-config
 ros-*-perception
 ros-*-perception-pcl
 ros-*-pcl-ros

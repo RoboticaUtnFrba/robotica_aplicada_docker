@@ -7,13 +7,21 @@ repositories:
     type: git
     url: https://github.com/eborghi10/IndustrialRobots.git
     version: master
+  moveit:
+    type: git
+    url: https://github.com/eborghi10/moveit.git
+    version: melodic-devel
   moveit_grasps:
     type: git
     url: https://github.com/eborghi10/moveit_grasps.git
     version: melodic-devel-fix
   moveit_tutorials:
     type: git
-    url: https://github.com/ros-planning/moveit_tutorials.git
+    url: https://github.com/eborghi10/moveit_tutorials.git
+    version: melodic-devel
+  panda_moveit_config:
+    type: git
+    url: https://github.com/eborghi10/panda_moveit_config.git
     version: melodic-devel
   universal_robot:
     type: git

@@ -28,11 +28,16 @@ RUN /bin/bash -c ". /opt/ros/${ROS_DISTRO}/setup.bash; \
     cd build; make install"
 RUN rm -r ${MANIPULATORS_WS}
 
+USER $USER
+RUN echo ". /opt/ros/$ROS_DISTRO/setup.bash" >> /home/${USER}/.bashrc
+RUN echo "[[ -f /home/${USER}/catkin_ws/devel/setup.bash ]] && . /home/${USER}/catkin_ws/devel/setup.bash" >> /home/${USER}/.bashrc
+
 ######################################################
 
 # setup entrypoint
-COPY ./ros1_entrypoint.sh /
-RUN chmod +x /ros1_entrypoint.sh
+USER root
+COPY ros1_entrypoint.sh ros1_entrypoint.sh
+RUN chmod +x ros1_entrypoint.sh
 
-ENTRYPOINT [ "/ros1_entrypoint.sh" ]
-CMD [ "/bin/bash", "-c" ]
+ENTRYPOINT ["/bin/bash", "/ros1_entrypoint.sh"]
+CMD [ "/bin/bash" ]
