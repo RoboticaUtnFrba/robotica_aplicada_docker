@@ -49,4 +49,19 @@ RUN rm -r ${LEGGED_WS}
 COPY requirements.legged.txt requirements.legged.txt
 RUN cat requirements.legged.txt | xargs pip3 install
 
+# Install a virtual environment
+RUN apt-get update && apt-get install -y python3.8-venv && apt-get clean all
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Install gym
+RUN git clone https://github.com/openai/gym.git \
+    && cd gym \
+    && pip install -e .
+# Install pybullet-gym
+RUN git clone https://github.com/benelot/pybullet-gym.git \
+    && cd pybullet-gym \
+    && pip install -e .
+
 CMD [ "/bin/bash", "-c" ]
