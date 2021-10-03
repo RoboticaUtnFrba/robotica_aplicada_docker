@@ -15,9 +15,11 @@ repositories:
     type: git
     url: https://github.com/loco-3d/whole_body_state_msgs.git
     version: master
+  # Waiting to get this PR merged:
+  # https://github.com/loco-3d/whole_body_state_rviz_plugin/pull/12
   whole_body_state_rviz_plugin:
     type: git
-    url: https://github.com/loco-3d/whole_body_state_rviz_plugin.git
+    url: https://github.com/eborghi10/whole_body_state_rviz_plugin.git
     version: master
   xpp:
     type: git
