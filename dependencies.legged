@@ -1,9 +1,13 @@
 cmake
-libeigen3-dev
 coinor-libipopt-dev
+default-jdk
+libeigen3-dev
 libgl1-mesa-dev
 libjsoncpp-dev
+liblcm-dev
+liblcm1
 libncurses5-dev
+libqt5gamepad5-dev
 libspdlog-dev
 libusb-1.0.0-dev
 libzmq3-dev
@@ -13,3 +17,4 @@ python3-pip
 xterm
 
 ros-*-ifopt
+ros-*-teleop-twist-keyboard

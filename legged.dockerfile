@@ -64,4 +64,24 @@ RUN git clone https://github.com/benelot/pybullet-gym.git \
     && cd pybullet-gym \
     && pip install -e .
 
+# Install elevation_mapping packages with catkin_make_isolated
+ENV LEGGED_ISOLATED_WS=/legged_isolated_ws
+RUN mkdir -p ${LEGGED_ISOLATED_WS}/src
+COPY legged_isolated.repos legged_isolated.repos
+RUN vcs import $LEGGED_ISOLATED_WS/src < legged_isolated.repos --recursive
+WORKDIR $LEGGED_ISOLATED_WS
+RUN apt-get update -qq
+USER $USER
+RUN rosdep install --from-paths src --rosdistro=${ROS_DISTRO} -yi -r
+USER root
+RUN /bin/bash -c ". /opt/ros/${ROS_DISTRO}/setup.bash; \
+    catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release \
+                        -DCMAKE_INSTALL_PREFIX=/opt/ros/${ROS_DISTRO} \
+                        -DPYTHON_EXECUTABLE=/usr/bin/python3"
+RUN rm -r ${LEGGED_ISOLATED_WS}
+
+# Adding this path is needed because the virtual environment
+# overwrites the path and some ROS modules cannot be found
+ENV PYTHONPATH="/usr/lib/python3/dist-packages:${PYTHONPATH}"
+
 CMD [ "/bin/bash", "-c" ]
