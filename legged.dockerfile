@@ -49,19 +49,9 @@ RUN rm -r ${LEGGED_WS}
 COPY requirements.legged.txt requirements.legged.txt
 RUN cat requirements.legged.txt | xargs pip3 install
 
-# Install a virtual environment
-RUN apt-get update && apt-get install -y python3.8-venv && apt-get clean all
-ENV VIRTUAL_ENV=/opt/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
 # Install gym
 RUN git clone https://github.com/openai/gym.git \
     && cd gym \
-    && pip install -e .
-# Install pybullet-gym
-RUN git clone https://github.com/benelot/pybullet-gym.git \
-    && cd pybullet-gym \
     && pip install -e .
 
 # Install elevation_mapping packages with catkin_make_isolated
@@ -79,9 +69,5 @@ RUN /bin/bash -c ". /opt/ros/${ROS_DISTRO}/setup.bash; \
                         -DCMAKE_INSTALL_PREFIX=/opt/ros/${ROS_DISTRO} \
                         -DPYTHON_EXECUTABLE=/usr/bin/python3"
 RUN rm -r ${LEGGED_ISOLATED_WS}
-
-# Adding this path is needed because the virtual environment
-# overwrites the path and some ROS modules cannot be found
-ENV PYTHONPATH="/usr/lib/python3/dist-packages:${PYTHONPATH}"
 
 CMD [ "/bin/bash", "-c" ]

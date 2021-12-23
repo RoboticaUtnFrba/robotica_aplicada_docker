@@ -6,10 +6,11 @@ USER root
 # Install Webots
 WORKDIR /home/${USER}
 COPY dependencies.webots.${ROS_DISTRO} dependencies.webots
-RUN wget -qO- https://cyberbotics.com/Cyberbotics.asc | apt-key add -
-RUN apt-add-repository 'deb https://cyberbotics.com/debian/ binary-amd64/'
-RUN apt-get update && \
-  xargs -a dependencies.webots apt-get install -y -qq
+# RUN wget -qO- https://cyberbotics.com/Cyberbotics.asc | apt-key add - \
+#   && apt-add-repository 'deb https://cyberbotics.com/debian/ binary-amd64/' \
+#   && apt-get update \
+#   && xargs -a dependencies.webots apt-get install -y -qq \
+#   && sudo apt-get clean all
 
 ENV WEBOTS_HOME=/usr/local/webots
 # https://cyberbotics.com/doc/guide/running-extern-robot-controllers#running-extern-robot-controllers

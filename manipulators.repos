@@ -23,6 +23,10 @@ repositories:
     type: git
     url: https://github.com/eborghi10/panda_moveit_config.git
     version: melodic-devel
+  sciurus17_ros:
+    type: git
+    url: https://github.com/rt-net/sciurus17_ros.git
+    version: master
   universal_robot:
     type: git
     url: https://github.com/ros-industrial/universal_robot.git
